@@ -1,0 +1,63 @@
+﻿<Window x:Class="UpdaterProgressScreen.ProgressScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:updaterProgressScreen="clr-namespace:UpdaterProgressScreen"
+        xmlns:viewModels="clr-namespace:UpdaterProgressScreen.ViewModels"
+        xmlns:designViewModels="clr-namespace:UpdaterProgressScreen.DesignViewModels"
+        Title="queo Software Updater"
+        mc:Ignorable="d"
+        Height="300"
+        Width="600"
+        SnapsToDevicePixels="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize">
+    <d:DesignProperties.DataContext>
+        <designViewModels:ProgressScreenDesignViewModel />
+    </d:DesignProperties.DataContext>
+    <Window.Resources>
+        <updaterProgressScreen:DetailTemplateSelector x:Key="_detailTemplateSelector">
+            <updaterProgressScreen:DetailTemplateSelector.ErrorTemplate>
+                <DataTemplate DataType="viewModels:ErrorViewModel">
+                    <updaterProgressScreen:ErrorControl DataContext="{Binding}" />
+                </DataTemplate>
+            </updaterProgressScreen:DetailTemplateSelector.ErrorTemplate>
+            <updaterProgressScreen:DetailTemplateSelector.ProgressTemplate>
+                <DataTemplate DataType="viewModels:ProgressViewModel">
+                    <updaterProgressScreen:ProgressControl DataContext="{Binding}" />
+                </DataTemplate>
+            </updaterProgressScreen:DetailTemplateSelector.ProgressTemplate>
+        </updaterProgressScreen:DetailTemplateSelector>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Label Foreground="#565656"
+               Content="Update wird durchgeführt ..."
+               FontSize="20"
+               FontWeight="Light" />
+        <ContentControl Grid.Row="1"
+                        Content="{Binding Path=DetailViewModel}"
+                        ContentTemplateSelector="{StaticResource _detailTemplateSelector}"
+                        Margin="5" />
+        <Image Source="/UpdaterProgressScreen;component/Assets/Logo_queo_flow.png"
+               Width="120"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Bottom"
+               Margin="10"
+               Grid.Row="2">
+            <Image.Effect>
+                <DropShadowEffect Color="#BABABA"
+                                  Direction="0"
+                                  ShadowDepth="0"
+                                  BlurRadius="10" />
+            </Image.Effect>
+        </Image>
+
+    </Grid>
+</Window>

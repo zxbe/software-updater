@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="UpdaterProgressScreen.ErrorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:updaterProgressScreen="clr-namespace:UpdaterProgressScreen"
+             xmlns:designViewModels="clr-namespace:UpdaterProgressScreen.DesignViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="400">
+    <d:DesignProperties.DataContext>
+        <designViewModels:ErrorDesignViewModel></designViewModels:ErrorDesignViewModel>
+    </d:DesignProperties.DataContext>
+    <StackPanel>
+            <Label Content="{Binding Path=ErrorMessage}" ></Label>
+        <Button Content="OK" Command="{Binding Path=AcknowledgeErrorCommand}" Margin="20,0,20,0"></Button>
+    </StackPanel>
+</UserControl>
